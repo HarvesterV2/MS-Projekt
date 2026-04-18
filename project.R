@@ -33,3 +33,9 @@ miary2 <- policz_miary(market2)
 par(mfrow=c(2,2))
 rysuj_histogram(market1, 1)
 rysuj_histogram(market2, 2)
+
+# 3. Sprawdzić, czy miesięczne wydatki na jedną osobę, na jarzyny i warzywa mają rozkład
+# normalny (test zgodności Kołmogorowa-Lillieforsa, współczynnik ufności 0,95).
+source("3.R")
+test_lillieforsa(market1, 1, miary1)
+test_lillieforsa(market2, 2, miary2)
