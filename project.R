@@ -9,13 +9,7 @@ globalmax = max(c(market1,market2))
 # Polecenie 1.
 # Zaprezentować dane wykorzystując wykresy pudełkowe. medianę i kwartale
 source("1.R")
-par(mfrow=c(1,4))
-rysuj_pudelko(market1, 1)
-rysuj_pudelko(market2, 2)
-
-# Wykres odchylenie standardowe.
-rysuj_odchylenie(market1, 1)
-rysuj_odchylenie(market2, 2)
+Zadanie1_wyniki = Zadanie1(list(market1, market2))
 
 # Polecenie 2. 
 # Dokonać analizy miesięcznych wydatków na jedną osobę, na jarzyny i warzywa klientów wybranych marketów,

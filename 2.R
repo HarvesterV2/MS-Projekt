@@ -12,9 +12,9 @@ policz_miary <- function(dane) {
     odchylenie_cwiartkowe = IQR(dane)/2,
     wsp_zmiennosci = sd(dane)/srednia * 100,
     pozycyjny_wsp_zmiennosci = IQR(dane)/(2*mediana) * 100,
-    skosnosc = skewness(dane),
-    kurtoza = kurtosis(dane),
-    eksces = kurtosis(dane) - 3
+    skosnosc = skosnosc(dane),
+    kurtoza = kurtoza(dane),
+    eksces = kurtoza(dane) - 3
   )
 
   return(wyniki)
@@ -26,3 +26,27 @@ rysuj_histogram <- function(market, num) {
   freq_market = table(cut(market,breaks = breaks_market, right=FALSE))
   hist(market,breaks = breaks_market, main = paste("Histogram rozkładu empirycznego\nSzereg rozdzielczy. Market ", num),xlab="Wydatki[zł]",ylab="Częstość",xlim = c(globalmin-1,globalmax+5))
 }
+
+skosnosc <- function(x) {
+  x <- unlist(x)
+  n <- length(x)
+  m <- mean(x)
+  s <- sd(x)
+  
+  sum((x - m)^3) / n / (s^3) * ((n * (n - 1))^0.5 / (n - 2))
+  
+}  
+
+kurtoza <- function(x) {
+    x <- unlist(x)
+    n <- length(x)
+    m <- mean(x)
+    s <- sd(x)
+    
+    term1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3)) *
+      sum((x - m)^4) / (s^4)
+    
+    term2 <- (3 * (n - 1)^2) / ((n - 2) * (n - 3))
+    
+    term1 - term2
+  }
