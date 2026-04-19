@@ -3,8 +3,11 @@ policz_miary <- function(dane) {
   mediana <- median(dane)
 
   wyniki <- list(
-    wariancja = var(dane),
-    odchylenie_std = sd(dane),
+    wariancja_populacja = sum((dane-srednia)^2)/length(dane),
+    odchylenie_std_populacja= sqrt(sum((dane-srednia)^2)/length(dane)),
+    #n-1
+    wariancja_proba = var(dane),
+    odchylenie_std_proba = sd(dane),
     srednia = srednia,
     odchylenie_przecietne = mean(abs(dane - srednia)),
     mediana = mediana,
@@ -38,15 +41,25 @@ skosnosc <- function(x) {
 }  
 
 kurtoza <- function(x) {
-    x <- unlist(x)
-    n <- length(x)
-    m <- mean(x)
-    s <- sd(x)
-    
-    term1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3)) *
-      sum((x - m)^4) / (s^4)
-    
-    term2 <- (3 * (n - 1)^2) / ((n - 2) * (n - 3))
-    
-    term1 - term2
-  }
+  x <- unlist(x)
+  n <- length(x)
+  m <- mean(x)
+  
+  m4 <- sum((x - m)^4) / n
+  m2 <- sum((x - m)^2) / n
+  
+  m4 / (m2^2)
+}
+
+policz_miary_szereg_rozdzielczy <- function(market)
+{
+  bb <- seq(min(market), max(market), length.out =ceiling(sqrt(length(market))))
+  hh <- hist(market, breaks = bb, plot = FALSE)
+  srednia <- sum(hh$mids * hh$counts) / sum(hh$counts)
+  mediana <- 
+  
+  wyniki <- list(
+    srednia = srednia)
+  return(wyniki)
+  
+}

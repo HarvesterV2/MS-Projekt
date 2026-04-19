@@ -18,6 +18,8 @@ source("2.R")
 
 miary1 <- policz_miary(market1)
 miary2 <- policz_miary(market2)
+miary1_szereg_rozdzielczy <- policz_miary_szereg_rozdzielczy(market1)
+miary2_szereg_rozdzielczy <- policz_miary_szereg_rozdzielczy(market2)
 
 # Opracować histogramy rozkładów empirycznych. Miary wyznaczyć dwoma 
 # sposobami: a) na podstawie szeregu szczegółowego, b) na podstawie szeregu rozdzielczego.
