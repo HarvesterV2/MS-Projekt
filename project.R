@@ -1,6 +1,3 @@
-#install.packages("DescTools")# Install DescTools package
-library("DescTools")  
-
 setwd(".")
 dane <- read.csv2("dane.csv")
 market1 <- na.omit(dane$Market1)

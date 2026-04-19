@@ -1,6 +1,4 @@
 policz_miary <- function(dane) {
-  library(e1071)
-
   srednia <- mean(dane)
   mediana <- median(dane)
 
@@ -23,8 +21,8 @@ policz_miary <- function(dane) {
 }
 
 rysuj_histogram <- function(market, num) {
-  hist(market, main = "Histogram rozkładu empirycznego\nSzereg szczegółowy. Market 1",xlab="Wydatki[zł]",ylab="Częstość",xlim = c(globalmin-1,globalmax+5))
+  hist(market, main = paste("Histogram rozkładu empirycznego\nSzereg szczegółowy. Market", num),xlab="Wydatki[zł]",ylab="Częstość",xlim = c(globalmin-1,globalmax+5))
   breaks_market = seq(20,45,by=5)
   freq_market = table(cut(market,breaks = breaks_market, right=FALSE))
-  hist(market,breaks = breaks_market, main = "Histogram rozkładu empirycznego\nSzereg rozdzielczy. Market 1",xlab="Wydatki[zł]",ylab="Częstość",xlim = c(globalmin-1,globalmax+5))
+  hist(market,breaks = breaks_market, main = paste("Histogram rozkładu empirycznego\nSzereg rozdzielczy. Market ", num),xlab="Wydatki[zł]",ylab="Częstość",xlim = c(globalmin-1,globalmax+5))
 }
