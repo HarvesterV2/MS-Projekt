@@ -30,5 +30,16 @@ rysuj_histogram(market2, 2)
 # 3. Sprawdzić, czy miesięczne wydatki na jedną osobę, na jarzyny i warzywa mają rozkład
 # normalny (test zgodności Kołmogorowa-Lillieforsa, współczynnik ufności 0,95).
 source("3.R")
-test_lillieforsa(market1, 1, miary1)
-test_lillieforsa(market2, 2, miary2)
+Zadanie3(market1, market2, miary1, miary2)
+
+# 4. Czy na poziomie istotności 0,05 można twierdzić, że przeciętna wartość miesięcznych
+# wydatków na jedną osobę, na jarzyny i warzywa dla klientów pierwszego marketu jest
+# równa 32 zł?
+source("4.R")
+Zadanie4(market1, miary1)
+
+# 5. Czy na poziomie istotności 0,05 można twierdzić, że odchylenie standardowe miesięcz-
+# nych wydatków na jedną osobę, na jarzyny i warzywa dla klientów drugiego marketu jest
+# równe 4,0 zł?
+source("5.R")
+Zadanie5(market2, miary2)
