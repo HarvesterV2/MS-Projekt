@@ -1,3 +1,8 @@
+Zadanie3 <- function(market1, market2, miary1, miary2) {
+  test_lillieforsa(market1, 1, miary1)
+  test_lillieforsa(market2, 2, miary2)
+}
+
 test_lillieforsa <- function(dane, num, miary) {
   dane <- sort(dane)
   n <- length(dane)
@@ -9,7 +14,7 @@ test_lillieforsa <- function(dane, num, miary) {
   Fn <- (1 : n) / n
   
   # dystrybuanta normalna
-  F0 <- pnorm(dane, miary$srednia, miary$odchylenie_std)
+  F0 <- pnorm(dane, miary$srednia, miary$odchylenie_std_proba)
   
   # statystyka D
   D <- max(abs(Fn - F0))
@@ -22,8 +27,8 @@ test_lillieforsa <- function(dane, num, miary) {
   cat("Wartość krytyczna =", D_crit, "\n")
   
   if (D > D_crit) {
-    cat("Wniosek: odrzucamy H0 → brak normalności\n")
+    cat("Wniosek: odrzucamy H0 -> brak normalności\n")
   } else {
-    cat("Wniosek: brak podstaw do odrzucenia H0 → rozkład normalny\n")
+    cat("Wniosek: brak podstaw do odrzucenia H0 -> rozkład normalny\n")
   }
 }
