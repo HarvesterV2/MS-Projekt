@@ -23,7 +23,7 @@ Zadanie2 <-function(markets)
 policz_miary <- function(dane) {
   srednia <- mean(dane)
   mediana <- median(dane)
-
+  
   wyniki <- list(
     srednia = srednia,
     mediana = mediana,

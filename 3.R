@@ -1,34 +1,38 @@
-Zadanie3 <- function(market1, market2, miary1, miary2) {
-  test_lillieforsa(market1, 1, miary1)
-  test_lillieforsa(market2, 2, miary2)
+Zadanie3 <- function(market1, market2) {
+  cat("Market 1:\n")
+  test_lillieforsa(market1)
+  cat("Market 2:\n")
+  test_lillieforsa(market2)
 }
 
-test_lillieforsa <- function(dane, num, miary) {
+test_lillieforsa <- function(dane, alfa) {
   dane <- sort(dane)
-  n <- length(dane)
+  n = length(dane)
   
-  mu <- mean(dane)
-  sigma <- sd(dane)
+  srednia = mean(dane)
+  odchylenie = sd(dane)
   
   # dystrybuanta empiryczna
-  Fn <- (1 : n) / n
+  Fn_plus <- (1 : n) / n
+  Fn_minus <- ((1 : n) - 1) / n
   
   # dystrybuanta normalna
-  F0 <- pnorm(dane, miary$srednia, miary$odchylenie_std)
+  F0 <- pnorm(dane, srednia, odchylenie)
   
   # statystyka D
-  D <- max(abs(Fn - F0))
+  D_plus = abs(Fn_plus - F0)
+  D_minus = abs(F0 - Fn_minus)
+  D <- max(c(D_plus, D_minus))
   
   # przybliżona wartość krytyczna dla alfa = 0.05
-  D_crit <- 0.886 / sqrt(n)
+  K_crit <- 0.886 / sqrt(n)
   
-  cat("=== Market", num, "===\n")
-  cat("Statystyka D =", D, "\n")
-  cat("Wartość krytyczna =", D_crit, "\n")
+  cat("Statystyka D:", D, "\n")
+  cat("Wartość krytyczna:", K_crit, "\n")
   
-  if (D > D_crit) {
-    cat("Wniosek: odrzucamy H0 -> brak normalności\n")
+  if (D > K_crit) {
+    cat("D > K_crit -> brak normalności\n")
   } else {
-    cat("Wniosek: brak podstaw do odrzucenia H0 -> rozkład normalny\n")
+    cat("D <= K_crit -> rozkład normalny\n")
   }
 }

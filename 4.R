@@ -1,11 +1,12 @@
-Zadanie4 <- function(market, miary) {
-  n <- length(market)
+Zadanie4 <- function(market, h0, alfa, rodzaj) {
+  n = length(market)
   
-  m_0 = 32
-  t = (miary$srednia - m_0) * sqrt(n - 1) / miary$odchylenie_std
+  srednia = mean(market)
+  odchylenie = sqrt(sum((market - srednia) ^ 2) / n)
   
-  alpha = 0.05
-  t_crit = qt(1 - alpha / 2, n - 1)
+  t = (srednia - h0) * sqrt(n - 1) / odchylenie
+  
+  t_crit = qt(1 - alfa / 2, n - 1)
   
   cat("T:", t, "T_kryt:", t_crit, "\n")
   if (t > -t_crit && t < t_crit) {
