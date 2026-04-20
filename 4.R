@@ -2,7 +2,7 @@ Zadanie4 <- function(market, miary) {
   n <- length(market)
   
   m_0 = 32
-  t = (miary$srednia - m_0) * sqrt(n - 1) / miary$odchylenie_std_proba
+  t = (miary$srednia - m_0) * sqrt(n - 1) / miary$odchylenie_std
   
   alpha = 0.05
   t_crit = qt(1 - alpha / 2, n - 1)

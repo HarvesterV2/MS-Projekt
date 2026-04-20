@@ -2,7 +2,7 @@ Zadanie5 <- function(market, miary) {
   n <- length(market)
   
   m_0 = 4
-  X = n * miary$wariancja_proba / (m_0 ^ 2)
+  X = n * miary$wariancja / (m_0 ^ 2)
   
   alpha = 0.05
   qchi_l = qchisq(alpha/2, n - 1)

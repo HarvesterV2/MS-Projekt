@@ -14,7 +14,7 @@ test_lillieforsa <- function(dane, num, miary) {
   Fn <- (1 : n) / n
   
   # dystrybuanta normalna
-  F0 <- pnorm(dane, miary$srednia, miary$odchylenie_std_proba)
+  F0 <- pnorm(dane, miary$srednia, miary$odchylenie_std)
   
   # statystyka D
   D <- max(abs(Fn - F0))
