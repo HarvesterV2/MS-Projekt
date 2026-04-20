@@ -1,23 +1,50 @@
+Zadanie2 <-function(markets)
+{
+  miary1 <- policz_miary(markets[[1]])
+  miary2 <- policz_miary(markets[[2]])
+  miary1_szereg_rozdzielczy <- policz_miary_szereg_rozdzielczy(markets[[1]])
+  miary2_szereg_rozdzielczy <- policz_miary_szereg_rozdzielczy(markets[[2]])
+  
+  # Opracować histogramy rozkładów empirycznych. Miary wyznaczyć dwoma 
+  # sposobami: a) na podstawie szeregu szczegółowego, b) na podstawie szeregu rozdzielczego.
+  par(mfrow=c(2,2))
+  rysuj_histogram(markets[[1]], 1)
+  rysuj_histogram(markets[[2]], 2)
+  tabela <- data.frame(Nazwa = names(miary1_szereg_rozdzielczy),
+                       Market1_Szereg_Szczegółowy = unlist(miary1),
+                       Market1_szereg_Rozdzielczy = unlist(miary1_szereg_rozdzielczy),
+                       Market2_Szereg_Szczegółowy = unlist(miary2),
+                       Market2_szereg_Rozdzielczy = unlist(miary2_szereg_rozdzielczy))
+  
+  #return(list(miary1,miary1_szereg_rozdzielczy,miary2,miary2_szereg_rozdzielczy))
+  return(tabela)
+}
+
 policz_miary <- function(dane) {
   srednia <- mean(dane)
   mediana <- median(dane)
 
   wyniki <- list(
-    wariancja_populacja = sum((dane-srednia)^2)/length(dane),
-    odchylenie_std_populacja= sqrt(sum((dane-srednia)^2)/length(dane)),
-    #n-1
-    wariancja_proba = var(dane),
-    odchylenie_std_proba = sd(dane),
     srednia = srednia,
-    moda = Mode(dane),
-    Q1 = unname(quantile(dane,prob=0.25)),
-    Q3 = unname(quantile(dane,prob=0.75)),
-    odchylenie_przecietne = mean(abs(dane - srednia)),
     mediana = mediana,
-    odchylenie_od_mediany = mean(abs(dane - mediana)),
-    odchylenie_cwiartkowe = IQR(dane)/2,
-    wsp_zmiennosci = sd(dane)/srednia * 100,
-    pozycyjny_wsp_zmiennosci = IQR(dane)/(2*mediana) * 100,
+    moda = Mode(dane),
+    Q1 = unname(quantile(dane, prob = 0.25)),
+    Q3 = unname(quantile(dane, prob = 0.75)),
+    
+    wariancja = sum((dane - srednia)^2) / length(dane),
+    wariancja_gwiazdka = var(dane),
+    
+    odchylenie_std = sqrt(sum((dane - srednia)^2) / length(dane)),
+    odchylenie_std_gwiazdka = sd(dane),
+    
+    odchylenie_przecietne = mean(abs(dane - srednia)),
+    odchylenie_przecietne_od_mediany = mean(abs(dane - mediana)),
+    
+    odchylenie_cwiartkowe = IQR(dane) / 2,
+    
+    wspolczynnik_zmiennosci = sd(dane) / srednia * 100,
+    pozycyjny_wspolczynnik_zmiennosci = IQR(dane) / (2 * mediana) * 100,
+    
     skosnosc = skosnosc(dane),
     kurtoza = kurtoza(dane),
     eksces = kurtoza(dane) - 3
@@ -113,11 +140,11 @@ policz_miary_szereg_rozdzielczy <- function(market)
   Q3 <- L_Q3 + ((pozycja_Q3 - F_prev_Q3) / f_Q3) * h_Q3
   
   #wariancje
-  wariancja_gwiazdka <- sum(liczebnosci_w_przedzialach * (hh$mids - srednia)^2) / sum(liczebnosci_w_przedzialach)
-  wariancja <- sum(liczebnosci_w_przedzialach * (hh$mids - srednia)^2) / (sum(liczebnosci_w_przedzialach) - 1)
+  wariancja <- sum(liczebnosci_w_przedzialach * (hh$mids - srednia)^2) / sum(liczebnosci_w_przedzialach)
+  wariancja_gwiazdka <- sum(liczebnosci_w_przedzialach * (hh$mids - srednia)^2) / (sum(liczebnosci_w_przedzialach) - 1)
   #odchylenia
-  odchylenie_std_gwiazdka = sqrt(wariancja_gwiazdka)
   odchylenie_std = sqrt(wariancja)
+  odchylenie_std_gwiazdka = sqrt(wariancja_gwiazdka)
   #odchylenie przeciętne
   odchylenie_przecietne <- sum(liczebnosci_w_przedzialach * abs(hh$mids - srednia)) / length(market)
   #odchylenie przecietne od mediany
@@ -136,23 +163,23 @@ policz_miary_szereg_rozdzielczy <- function(market)
   
   #wyniki
   wyniki <- list(
-    srednia = srednia,
-    mediana = mediana,
-    moda = moda,
-    Q1 = Q1,
-    Q3 = Q3,
-    wariancja_gwiazdka = wariancja_gwiazdka,
-    wariancja = wariancja,
-    odchylenie_std_gwiazdka = odchylenie_std_gwiazdka,
-    odchylenie_std= odchylenie_std,
-    odchylenie_przecietne = odchylenie_przecietne,
-    odchylenie_przecietne_od_mediany = odchylenie_przecietne_od_mediany,
-    odchylenie_cwiartkowe = odchylenie_cwiartkowe,
-    wspolczynnik_zmiennosci = wspolczynnik_zmiennosci,
-    pozycyjny_wspolczynnik_zmiennosci = pozycyjny_wspolczynnik_zmiennosci,
-    skosnosc = skosnosc,
-    kurtoza = kurtoza,
-    eksces = eksces
+    "Średnia" = srednia,
+    "Mediana" = mediana,
+    "Moda" = moda,
+    "Q1" = Q1,
+    "Q3" = Q3,
+    "Wariancja" = wariancja,
+    "Wariancja nieobciążona" = wariancja_gwiazdka,
+    "Odchylenie standardowe"= odchylenie_std,
+    "Odchylenie standardowe nieobciążone" = odchylenie_std_gwiazdka,
+    "Odchylenie przeciętne" = odchylenie_przecietne,
+    "Odchylenie przeciętne od mediany" = odchylenie_przecietne_od_mediany,
+    "Odchylenie ćwiartkowe" = odchylenie_cwiartkowe,
+    "Współczynnik zmienności w procentach" = wspolczynnik_zmiennosci,
+    "Pozycyjny współczynnik zmienności w procentach" = pozycyjny_wspolczynnik_zmiennosci,
+    "Skośność" = skosnosc,
+    "Kurtoza" = kurtoza,
+    "Eksces" = eksces
     )
   return(wyniki)
   
