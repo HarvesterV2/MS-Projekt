@@ -10,14 +10,15 @@ Zadanie2 <-function(markets)
   par(mfrow=c(2,2))
   rysuj_histogram(markets[[1]], 1)
   rysuj_histogram(markets[[2]], 2)
-  tabela <- data.frame(Nazwa = names(miary1_szereg_rozdzielczy),
-                       Market1_Szereg_Szczegółowy = unlist(miary1),
-                       Market1_szereg_Rozdzielczy = unlist(miary1_szereg_rozdzielczy),
-                       Market2_Szereg_Szczegółowy = unlist(miary2),
-                       Market2_szereg_Rozdzielczy = unlist(miary2_szereg_rozdzielczy))
+  tabela1 <- data.frame(Market1_Szereg_Szczegółowy = unname(unlist(miary1)),
+                       Market1_szereg_Rozdzielczy = unlist(miary1_szereg_rozdzielczy))
+  
+  tabela2 <- data.frame(Market1_Szereg_Szczegółowy = unname(unlist(miary2)),
+                        Market1_szereg_Rozdzielczy = unlist(miary2_szereg_rozdzielczy))
   
   #return(list(miary1,miary1_szereg_rozdzielczy,miary2,miary2_szereg_rozdzielczy))
-  return(tabela)
+  return(list(tabela1 = tabela1,
+              tabela2 = tabela2))
 }
 
 policz_miary <- function(dane) {

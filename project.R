@@ -18,6 +18,8 @@ Zadanie1(list(market1, market2))
 # sposobami: a) na podstawie szeregu szczegółowego, b) na podstawie szeregu rozdzielczego.
 source("2.R")
 Tabelka_zadanie_2 = Zadanie2(list(market1, market2))
+Tabelka_zadanie2_market1 = Tabelka_zadanie_2$tabela1
+Tabelka_zadanie2_market2 = Tabelka_zadanie_2$tabela2
 
 # 3. Sprawdzić, czy miesięczne wydatki na jedną osobę, na jarzyny i warzywa mają rozkład
 # normalny (test zgodności Kołmogorowa-Lillieforsa, współczynnik ufności 0,95).
