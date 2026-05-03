@@ -10,12 +10,16 @@ Zadanie2 <-function(markets)
   par(mfrow=c(2,2))
   rysuj_histogram(markets[[1]], 1)
   rysuj_histogram(markets[[2]], 2)
-  tabela1 <- data.frame(Market1_Szereg_Szczegółowy = unname(unlist(miary1)),
-                       Market1_szereg_Rozdzielczy = unlist(miary1_szereg_rozdzielczy))
+  tabela1 <- data.frame(Nazwa = names(miary1_szereg_rozdzielczy),
+                      Szereg_Szczegółowy = unname(unlist(miary1)),
+                      Szereg_Rozdzielczy = unname(unlist(miary1_szereg_rozdzielczy)))
   
-  tabela2 <- data.frame(Market1_Szereg_Szczegółowy = unname(unlist(miary2)),
-                        Market1_szereg_Rozdzielczy = unlist(miary2_szereg_rozdzielczy))
+  tabela2 <- data.frame(Nazwa = names(miary2_szereg_rozdzielczy),
+                        Szereg_Szczegółowy = unname(unlist(miary2)),
+                        Szereg_Rozdzielczy = unname(unlist(miary2_szereg_rozdzielczy)))
   
+  wyswietl_tabele(tabela1,1)
+  wyswietl_tabele(tabela2,2)
   #return(list(miary1,miary1_szereg_rozdzielczy,miary2,miary2_szereg_rozdzielczy))
   return(list(tabela1 = tabela1,
               tabela2 = tabela2))
@@ -26,6 +30,7 @@ policz_miary <- function(dane) {
   mediana <- median(dane)
   
   wyniki <- list(
+    suma = as.integer(length(dane)),
     srednia = srednia,
     mediana = mediana,
     moda = Mode(dane),
@@ -48,7 +53,9 @@ policz_miary <- function(dane) {
     
     skosnosc = skosnosc(dane),
     kurtoza = kurtoza(dane),
-    eksces = kurtoza(dane) - 3
+    eksces = kurtoza(dane) - 3,
+    min = min(dane),
+    max = max(dane)
   )
 
   return(wyniki)
@@ -164,6 +171,7 @@ policz_miary_szereg_rozdzielczy <- function(market)
   
   #wyniki
   wyniki <- list(
+    "Liczba obserwacji" = as.integer(length(market)),
     "Średnia" = srednia,
     "Mediana" = mediana,
     "Moda" = moda,
@@ -180,8 +188,44 @@ policz_miary_szereg_rozdzielczy <- function(market)
     "Pozycyjny współczynnik zmienności w procentach" = pozycyjny_wspolczynnik_zmiennosci,
     "Skośność" = skosnosc,
     "Kurtoza" = kurtoza,
-    "Eksces" = eksces
+    "Eksces" = eksces,
+    "Min" = min(market),
+    "Max" = max(market)
     )
   return(wyniki)
   
+}
+
+wyswietl_tabele <- function(table,nr_market)
+{
+  cat(paste("Market ",nr_market))
+  cat("\n")
+  cat(format("Liczba obserwacji: ",width = 64,justify = "left"))
+  cat(table$Szereg_Szczegółowy[table$Nazwa == "Liczba obserwacji"], "\n")
+  #print_table(table[table$Nazwa == "Liczba obserwacji",])
+  
+  headers <- c(
+    format(colnames(table)[1], width = 62, justify = "left"),
+    format(colnames(table)[2], width = 20, justify = "right"),
+    format(colnames(table)[3], width = 20, justify = "right")
+  )
+  cat(paste(headers, collapse = ""), "\n")
+
+  cat("Miary położenia:")
+  print_table(table[2:6,])
+  cat("Miary rozproszenia:\n")
+  cat(paste(format("Zakres", width = 62, justify = "left"),"<",table$Szereg_Szczegółowy[table$Nazwa == "Min"],",",table$Szereg_Szczegółowy[table$Nazwa == "Max"],">"))
+  print_table(table[7:15,])
+  cat("Miary asymetrii:")
+  print_table(table[16:18,])
+  cat("\n")
+}
+
+print_table <- function(table)
+{
+  table$Nazwa <- format(table$Nazwa, width = 50, justify = "left")
+  table$Szereg_Szczegółowy  <- format(table$Szereg_Szczegółowy, width = 20, justify = "left")
+  table$Szereg_Rozdzielczy  <- format(table$Szereg_Rozdzielczy, width = 20, justify = "left")
+  colnames(table) <- rep("", ncol(table))
+  print(table,row.names = FALSE)
 }
