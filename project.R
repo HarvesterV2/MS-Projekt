@@ -30,10 +30,10 @@ Zadanie3(market1, market2)
 # wydatków na jedną osobę, na jarzyny i warzywa dla klientów pierwszego marketu jest
 # równa 32 zł?
 source("4.R")
-Zadanie4(market1, 32, 0.05, 0)
+Zadanie4(market1, 32, 0.05, 'a')
 
 # 5. Czy na poziomie istotności 0,05 można twierdzić, że odchylenie standardowe miesięcz-
 # nych wydatków na jedną osobę, na jarzyny i warzywa dla klientów drugiego marketu jest
 # równe 4,0 zł?
 source("5.R")
-Zadanie5(market2, 4.0, 0.05, 0)
+Zadanie5(market2, 4.0, 0.05, 'a')

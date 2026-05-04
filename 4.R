@@ -9,19 +9,18 @@ Zadanie4 <- function(market, h0, alfa, rodzaj) {
   t_crit = qt(1 - alfa / 2, n - 1)
   
   cat("T:",t, "\n")
-  if (rodzaj == 0) {
-    t_kryt_prawy = qt(1 - alfa / 2, n - 1)
-    t_kryt_lewy = -t_kryt_prawy
-    decyzja = (t <= t_kryt_lewy) || (t >= t_kryt_prawy)
-    cat("Obszar krytyczny dwustronny:", "( -inf ;",t_kryt_lewy,"> u <", t_kryt_prawy, "; inf )\n")
-  } else if (rodzaj == 1) {
-    t_kryt = qt(1 - alfa, n - 1)
-    decyzja = (t >= t_kryt)
-    cat("Obszar krytyczny prawostronny:", "<",t_kryt,"; inf )\n")
+  if (rodzaj == "a") {
+    decyzja = zad4_dwustronna(t, alfa, n)
+  } else if (rodzaj == "b") {
+    decyzja = zad4_prawostronna(t, alfa, n)
+  } else if (rodzaj == "c") {
+    decyzja = zad4_lewostronna(t, alfa, n)
   } else {
-    t_kryt = -qt(1 - alfa, n - 1)
-    decyzja = (t <= t_kryt)
-    cat("Obszar krytyczny lewostronny:","( -inf ;", t_kryt, ">\n")
+    if (h0 > srednia) {
+      decyzja = zad4_prawostronna(t, alfa, n)
+    } else {
+      decyzja = zad4_lewsotronna(t, alfa, n)
+    }
   }
   
   if (decyzja) {
@@ -29,4 +28,26 @@ Zadanie4 <- function(market, h0, alfa, rodzaj) {
   } else {
     cat("Brak podstaw do odrzucenia H0\n")
   }
+}
+
+zad4_dwustronna <- function(t, alfa, n) {
+  t_kryt_prawy = qt(1 - alfa / 2, n - 1)
+  t_kryt_lewy = -t_kryt_prawy
+  decyzja = (t <= t_kryt_lewy) || (t >= t_kryt_prawy)
+  cat("Obszar krytyczny dwustronny:", "( -inf ;",t_kryt_lewy,"> u <", t_kryt_prawy, "; inf )\n")
+  return(decyzja)
+}
+
+zad4_lewsotronna <- function(t, alfa, n) {
+  t_kryt = -qt(1 - alfa, n - 1)
+  decyzja = (t <= t_kryt)
+  cat("Obszar krytyczny lewostronny:","( -inf ;", t_kryt, ">\n")
+  return(decyzja)
+}
+
+zad4_prawostronna <- function(t, alfa, n) {
+  t_kryt = qt(1 - alfa, n - 1)
+  decyzja = (t >= t_kryt)
+  cat("Obszar krytyczny prawostronny:", "<",t_kryt,"; inf )\n")
+  return(decyzja)
 }
