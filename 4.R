@@ -8,10 +8,25 @@ Zadanie4 <- function(market, h0, alfa, rodzaj) {
   
   t_crit = qt(1 - alfa / 2, n - 1)
   
-  cat("T:", t, "T_kryt:", t_crit, "\n")
-  if (t > -t_crit && t < t_crit) {
-    cat("T nie należy do obszaru krytycznego -> nie ma podstaw do odrzucenia hipotezy, że przeciętna wartość miesięcznych wydatków na jedną osobę, na jarzyny i warzywa dla klientów pierwszego marketu jest równa 32 zł.\n")
+  cat("T:",t, "\n")
+  if (rodzaj == 0) {
+    t_kryt_prawy = qt(1 - alfa / 2, n - 1)
+    t_kryt_lewy = -t_kryt_prawy
+    decyzja = (t <= t_kryt_lewy) || (t >= t_kryt_prawy)
+    cat("Obszar krytyczny dwustronny:", "( -inf ;",t_kryt_lewy,"> u <", t_kryt_prawy, "; inf )\n")
+  } else if (rodzaj == 1) {
+    t_kryt = qt(1 - alfa, n - 1)
+    decyzja = (t >= t_kryt)
+    cat("Obszar krytyczny prawostronny:", "<",t_kryt,"; inf )\n")
   } else {
-    cat("T należy do obszaru krytycznego -> odrzucamy hipotezę -> przeciętna wartość miesięcznych wydatków na jedną osobę, na jarzyny i warzywa dla klientów pierwszego marketu nie jest równa 32 zł.\n")
+    t_kryt = -qt(1 - alfa, n - 1)
+    decyzja = (t <= t_kryt)
+    cat("Obszar krytyczny lewostronny:","( -inf ;", t_kryt, ">\n")
+  }
+  
+  if (decyzja) {
+    cat("Odrzucamy H0\n")
+  } else {
+    cat("Brak podstaw do odrzucenia H0\n")
   }
 }

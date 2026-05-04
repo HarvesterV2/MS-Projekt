@@ -1,17 +1,29 @@
 Zadanie5 <- function(market, h0, alfa, rodzaj) {
   n = length(market)
   srednia = mean(market)
-  wariancja = sum((market - srednia)^2) / n
-
-  X = n * wariancja / (h0 ^ 2)
+  wariancja = var(market)
+  X = (n - 1) * wariancja / (h0 ^ 2)
   
-  qchi_lewy = qchisq(alfa/2, n - 1)
-  qchi_prawy = qchisq(1 - alfa/2, n - 1)
-  
-  cat("X:", X, "(-inf,",qchi_lewy,"> u <", qchi_prawy, ",inf)\n")
-  if (X > qchi_lewy && X < qchi_prawy) {
-    cat("X nie należy do obszaru krytycznego -> nie ma podstaw do odczucenia hipotezy, że odchylenie standardowe miesięcznych wydatków na jedną osobę, na jarzyny i warzywa dla klientów drugiego marketu jest równe 4,0 zł\n")
+  cat("X:",X,"\n")
+  if (rodzaj == 0) {
+    K_dwustronny_lewy = qchisq(alfa/2, n - 1)
+    K_dwustronny_prawy = qchisq(1 - alfa/2, n - 1)
+    decyzja = (X <= K_dwustronny_lewy) || (X >= K_dwustronny_prawy)
+    cat("Obszar krytyczny dwustronny:", X, "( -inf ;",K_dwustronny_lewy,"> u <", K_dwustronny_prawy, "; inf )\n")
+  } else if (rodzaj == 1) {
+    K_prawostronny = qchisq(1 - alfa, n - 1)
+    decyzja = (X >= K_prawostronny)
+    cat("Obszar krytyczny prawostronny:", X, "<",K_prawostronny,"; inf )\n")
   } else {
-    cat("X należy do obszaru krytycznego -> odrzucamy hipotezę -> odchylenie standardowe miesięcznych wydatków na jedną osobę, na jarzyny i warzywa dla klientów drugiego marketu nie jest równe 4,0 zł\n")
+    K_lewostronny = qchisq(alfa, n - 1)
+    decyzja = (X <= K_lewostronny)
+    cat("Obszar krytyczny lewostronny:",X,"( 0 ;", K_lewostronny, ">\n")
+  }
+
+
+  if (decyzja) {
+    cat("Odrzucamy H0\n")
+  } else {
+    cat("Brak podstaw do odrzucenia H0\n")
   }
 }
