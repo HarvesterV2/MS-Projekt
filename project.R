@@ -37,3 +37,9 @@ Zadanie4(market1, 32, 0.05, 'a')
 # równe 4,0 zł?
 source("5.R")
 Zadanie5(market2, 4.0, 0.05, 'a')
+
+# 6. Czy na poziomie istotności 0,05 można twierdzić, że wartości miesięcznych wydatków na 
+# jedną osobę, na jarzyny i warzywa są mniejsze dla klientów pierwszego marketu 
+# (sformułować i zweryfikować odpowiednią hipotezę)? 
+source("6.R")
+Zadanie6(list(market1, market2), 0.05)

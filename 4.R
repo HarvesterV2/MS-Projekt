@@ -15,7 +15,7 @@ Zadanie4 <- function(market, h0, alfa, rodzaj) {
     if (h0 > srednia) {
       decyzja = zad4_prawostronna(t, alfa, n, h0)
     } else {
-      decyzja = zad4_lewsotronna(t, alfa, n, h0)
+      decyzja = zad4_lewostronna(t, alfa, n, h0)
     }
   }
   cat("Wartość statystyki testowej T:",t, "\n")
@@ -32,15 +32,18 @@ zad4_dwustronna <- function(t, alfa, n, h0) {
   t_kryt_lewy = -t_kryt_prawy
   decyzja = (t <= t_kryt_lewy) || (t >= t_kryt_prawy)
   cat("Obszar krytyczny dwustronny:", "(-∞;",t_kryt_lewy,"> ∪ <", t_kryt_prawy, ";∞)\n")
+  #pvalue
+  cat("P-value: ",2 * (1 - pt(abs(t), n - 1)),"\n")
   return(decyzja)
 }
 
-zad4_lewsotronna <- function(t, alfa, n, h0) {
+zad4_lewostronna <- function(t, alfa, n, h0) {
   cat("Hipoteza alternatywna - przeciętna wartość miesięcznych wydatków na jedną osobę, na jarzyny i warzywa dla klientów pierwszego marketu jest mniejsza niż", h0, "zł.\n")
   t_kryt = -qt(1 - alfa, n - 1)
   decyzja = (t <= t_kryt)
   cat("Obszar krytyczny lewostronny:","(-∞;", t_kryt, ">\n")
-  
+  #pvalue
+  cat("P-value: ",pt(t, n - 1),"\n")
   return(decyzja)
 }
 
@@ -49,6 +52,7 @@ zad4_prawostronna <- function(t, alfa, n, h0) {
   t_kryt = qt(1 - alfa, n - 1)
   decyzja = (t >= t_kryt)
   cat("Obszar krytyczny prawostronny:", "<",t_kryt,";∞)\n")
-  
+  #pvalue
+  cat("P-value: ",1 - pt(t, n - 1),"\n")
   return(decyzja)
 }

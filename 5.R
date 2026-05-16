@@ -32,6 +32,8 @@ zad5_dwustronna <- function(X, alfa, n, h0) {
   K_dwustronny_prawy = qchisq(1 - alfa/2, n - 1)
   decyzja = (X <= K_dwustronny_lewy) || (X >= K_dwustronny_prawy)
   cat("Obszar krytyczny dwustronny:", "(0;",K_dwustronny_lewy,"> ∪ <", K_dwustronny_prawy, ";∞)\n")
+  #pvalue
+  cat("P-value: ",2 * min(pchisq(X, n - 1),1 - pchisq(X, n - 1)),"\n")
   return(decyzja)
 }
 
@@ -40,6 +42,8 @@ zad5_lewostronna <- function(X, alfa, n, h0) {
   K_lewostronny = qchisq(alfa, n - 1)
   decyzja = (X <= K_lewostronny)
   cat("Obszar krytyczny lewostronny:","(0;", K_lewostronny, ">\n")
+  #pvalue
+  cat("P-value: ",pchisq(X, n - 1),"\n")
   return(decyzja)
 }
 
@@ -48,5 +52,7 @@ zad5_prawostronna <- function(X, alfa, n, h0) {
   K_prawostronny = qchisq(1 - alfa, n - 1)
   decyzja = (X >= K_prawostronny)
   cat("Obszar krytyczny prawostronny:", "<",K_prawostronny,";∞)\n")
+  #pvalue
+  cat("P-value: ",1 - pchisq(X, n - 1),"\n")
   return(decyzja)
 }
