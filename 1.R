@@ -3,7 +3,7 @@ Zadanie1 <- function(markets)
   par(mfrow=c(1,2))
   boxplot(
     markets, 
-    main = paste("Obliczona\nMediana oraz Kwartyle"),
+    main = paste("Wykres prezentujący\nmedianę oraz kwartyle"),
     xlab = "Numer marketu: ",
     ylab="Wydatki [zł]",
     horizontal = FALSE,
@@ -41,7 +41,7 @@ rysuj_odchylenie <- function(markety) {
   
   boxplot(
     market_xx_list,
-    main = "Obliczone\nOdchylenie standardowe",
+    main = "Wykres prezentujący\nodchylenie standardowe",
     xlab = "Numer marketu: ",
     ylab = "Wydatki [zł]",
     ylim = c(globalmin, globalmax),
