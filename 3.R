@@ -1,7 +1,7 @@
 Zadanie3 <- function(market1, market2) {
-  cat("Market 1:\n")
+  cat("Test zgodności Kołmogorowa-Lillieforsa dla Marketu 1:\n")
   test_lillieforsa(market1)
-  cat("Market 2:\n")
+  cat("Test zgodności Kołmogorowa-Lillieforsa dla Marketu 2:\n")
   test_lillieforsa(market2)
 }
 
@@ -27,12 +27,12 @@ test_lillieforsa <- function(dane, alfa) {
   # przybliżona wartość krytyczna dla alfa = 0.05
   K_crit <- 0.886 / sqrt(n)
   
-  cat("Statystyka D:", D, "\n")
-  cat("Wartość krytyczna:", K_crit, "\n")
+  cat("Wartość statystyki D:", D, "\n")
+  cat("Obszar krytyczny: <", K_crit, ",1>\n")
   
   if (D > K_crit) {
-    cat("D > K_crit -> brak normalności\n")
+    cat("Statystyka D należy do obszaru krytycznego. Odrzucamy hipotezę zerową, że miesięczne wydatki na jedną osobę, na jarzyny i warzywa mają rozkład normalny.\n")
   } else {
-    cat("D <= K_crit -> rozkład normalny\n")
+    cat("Statystyka D nie należy do obszaru krytycznego. Nie ma podstaw do odrzucenia hipotezy zerowej, że miesięczne wydatki na jedną osobę, na jarzyny i warzywa mają rozkład normalny.\n")
   }
 }
