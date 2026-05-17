@@ -42,4 +42,4 @@ Zadanie5(market2, 4.0, 0.05, 'a')
 # jedną osobę, na jarzyny i warzywa są mniejsze dla klientów pierwszego marketu 
 # (sformułować i zweryfikować odpowiednią hipotezę)? 
 source("6.R")
-Zadanie6(list(market1, market2), 0.05)
+Zadanie6(list(market1, market2), 0.05, 'c')
