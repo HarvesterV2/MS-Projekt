@@ -42,4 +42,9 @@ Zadanie5(market2, 4.0, 0.05, 'a')
 # jedną osobę, na jarzyny i warzywa są mniejsze dla klientów pierwszego marketu 
 # (sformułować i zweryfikować odpowiednią hipotezę)? 
 source("6.R")
-Zadanie6(list(market1, market2), 0.05, 'c')
+Zadanie6(list(market1, market2), 0.05, 'c') 
+
+#7. Opracować test permutacyjny do sprawdzenia polecenia opisanego w punkcie 6. 
+source("7.R")
+Zadanie7(list(market1, market2),10000, 0.05,'c') 
+
