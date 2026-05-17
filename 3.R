@@ -1,11 +1,14 @@
 Zadanie3 <- function(market1, market2) {
-  cat("Test zgodności Kołmogorowa-Lillieforsa dla Marketu 1:\n")
+  cat("=== Test zgodności Kołmogorowa-Lillieforsa dla Marketu 1: ===\n")
   test_lillieforsa(market1)
-  cat("Test zgodności Kołmogorowa-Lillieforsa dla Marketu 2:\n")
+  cat("=== Test zgodności Kołmogorowa-Lillieforsa dla Marketu 2: ===\n")
   test_lillieforsa(market2)
 }
 
 test_lillieforsa <- function(dane, alfa) {
+  
+  cat("Hipoteza zerowa - Miesięczne wydatki na jedną osobę, na jarzyny i warzywa mają rozkład normalny.\n")
+  cat("Hipoteza alternatywna - Miesięczne wydatki na jedną osobę, na jarzyny i warzywa nie mają rozkładu normalnego.\n")
   dane <- sort(dane)
   n = length(dane)
   

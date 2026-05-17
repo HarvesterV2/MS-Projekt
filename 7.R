@@ -44,26 +44,27 @@ Zadanie7 <- function(markets, N = 10000, alfa, rodzaj = "c") {
     pvalue = mean(W_perm <= W_obs)
   }
   
+  cat("Liczba permutacji:", N, "\n")
+  cat("Statystyka testowa:", W_obs, "\n")
+  cat("P-value:", pvalue, "\n")
+  
   # decyzja
   decyzja = (pvalue < alfa)
   
   # CR (opisowy)
   if (decyzja) {
-    cat("Odrzucamy H0.\n")
+    cat("Odrzucamy hipotezę zerową H0 na rzecz hipotezy alternatywnej H1.\n")
   } else {
     cat("Brak podstaw do odrzucenia H0.\n")
   }
-  
-  cat("Statystyka testowa:", W_obs, "\n")
-  cat("P-value:", pvalue, "\n")
-  cat("Liczba permutacji:", N, "\n")
   
   # wykres
   par(mfrow=c(1,1))
   hist(W_perm,
        breaks = 40,
        main = "Test permutacyjny - rozkład statystyki",
-       xlab = "Różnica średnich (perm)",
+       xlab = "Różnica średnich",
+       ylab = "Częstość",
        col = "gray")
   
   abline(v = W_obs, col = "red", lwd = 2)
