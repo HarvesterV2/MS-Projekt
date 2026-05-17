@@ -15,7 +15,7 @@ Zadanie7 <- function(markets, N = 10000, alfa, rodzaj = "c") {
   } else if (rodzaj == "b") {
     cat("Hipoteza alternatywna H1 - średnia w 1 markecie większa niż w 2 markecie.\n")
   } else if (rodzaj == "c") {
-    cat("Hipoteza alternatywna H1 - średnia w 1 markecie mniejsza niż w 2 markecie.\n")
+    cat("Hipoteza alternatywna H1 - średnia w 1 markecie mniejsza niż w 2 markecie.\n") 
   }
   
   W_obs = mean(market1) - mean(market2)

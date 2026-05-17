@@ -61,7 +61,7 @@ test_srednie_marketow <- function(markets, alfa, czy_wariancje_rowne, rodzaj) {
   } else if (rodzaj == "b") { # prawo
     cat("Hipoteza alternatywna H1 - średnia w pierwszym markecie jest większa.\n")
   } else if (rodzaj == "c") { # lewo
-    cat("Hipoteza alternatywna H1 - średnia w pierwszym markecie jest mniejsza.\n")
+    cat("Hipoteza alternatywna H1 - średnia w pierwszym markecie jest mniejsza.\n") 
   }
   
   if(czy_wariancje_rowne)
