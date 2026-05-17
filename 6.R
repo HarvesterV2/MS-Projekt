@@ -19,8 +19,8 @@ test_Snedecora <- function(markets, alfa) {
   
   F = wariancja1 / wariancja2
   
-  cat("Hipoteza zerowa - wariancje miesięcznych wydatków w obu marketach są równe.\n")
-  cat("Hipoteza alternatywna - wariancje miesięcznych wydatków w obu marketach nie są równe.\n")
+  cat("Hipoteza zerowa H0 - wariancje miesięcznych wydatków w obu marketach są równe.\n")
+  cat("Hipoteza alternatywna H1 - wariancje miesięcznych wydatków w obu marketach nie są równe.\n")
   
   F_kryt_lewy = qf(alfa / 2, n1 - 1, n2 - 1)
   F_kryt_prawy = qf(1 - alfa / 2, n1 - 1, n2 - 1)
@@ -45,7 +45,7 @@ test_Snedecora <- function(markets, alfa) {
 
 test_srednie_marketow <- function(markets, alfa, czy_wariancje_rowne, rodzaj) {
   
-  cat("Hipoteza zerowa - średnie w obu marketach są sobie równe.\n")
+  cat("Hipoteza zerowa H0 - średnie w obu marketach są sobie równe.\n")
   
   if(rodzaj == "d" &&  mean( markets[[1]]) >  mean(markets[[2]])) {
     rodzaj = "b"
@@ -54,11 +54,11 @@ test_srednie_marketow <- function(markets, alfa, czy_wariancje_rowne, rodzaj) {
   }
   
   if (rodzaj == "a") { #obu
-    cat("Hipoteza alternatywna - średnia w obu marketach nie są sobie równe.\n")
+    cat("Hipoteza alternatywna H1 - średnia w obu marketach nie są sobie równe.\n")
   } else if (rodzaj == "b") { # prawo
-    cat("Hipoteza alternatywna - średnia w pierwszym markecie jest większa.\n")
+    cat("Hipoteza alternatywna H1 - średnia w pierwszym markecie jest większa.\n")
   } else if (rodzaj == "c") { # lewo
-    cat("Hipoteza alternatywna - średnia w pierwszym markecie jest mniejsza.\n")
+    cat("Hipoteza alternatywna H1 - średnia w pierwszym markecie jest mniejsza.\n")
   }
   
   if(czy_wariancje_rowne)
@@ -75,9 +75,9 @@ test_srednie_marketow <- function(markets, alfa, czy_wariancje_rowne, rodzaj) {
   cat("Obszar krytyczny:", wynik_modelu$kryt, "\n")
   cat("P-value:", wynik_modelu$pvalue, "\n")
   if (wynik_modelu$decyzja) {
-    cat("Odrzucamy H0 na rzecz hipotezy alternatywnej H1.\n")
+    cat("Odrzucamy hipotezę zerową H0 na rzecz hipotezy alternatywnej H1.\n")
   } else {
-    cat("Brak podstaw do odrzucenia H0.\n")
+    cat("Brak podstaw do odrzucenia hipotezy zerowej H0.\n")
   }
 }
 
