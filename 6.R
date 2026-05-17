@@ -104,7 +104,7 @@ statystyka_t_model2 <- function(markets, alfa, rodzaj) {
   
   if (rodzaj == "a") {
     
-    kryt_left = qt(alfa / 2, df)
+    kryt_left = -qt(1 - alfa / 2, df)
     kryt_right = qt(1 - alfa / 2, df)
     
     kryt = paste0("(-∞, ", kryt_left, "] ∪ [", kryt_right, ", ∞)")
@@ -121,10 +121,10 @@ statystyka_t_model2 <- function(markets, alfa, rodzaj) {
     
   } else if (rodzaj == "c") {
     
-    kryt = paste0("(-∞, ", qt(alfa, df), "]")
+    kryt = paste0("(-∞, ", -qt(1-alfa, df), "]")
     
     pvalue = pt(T, df)
-    decyzja = (T <= qt(alfa, df))
+    decyzja = (T <= -qt(1-alfa, df))
     
   }
   

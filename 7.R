@@ -1,4 +1,4 @@
-Zadanie7 <- function(markets, N = 10000, alfa, rodzaj = "c") {
+Zadanie7 <- function(markets, alfa, N = 10000, rodzaj = "c") {
   
   cat("=== Test permutacyjny dla różnicy średnich ===\n")
   
@@ -49,7 +49,7 @@ Zadanie7 <- function(markets, N = 10000, alfa, rodzaj = "c") {
   cat("P-value:", pvalue, "\n")
   
   # decyzja
-  decyzja = (pvalue < alfa)
+  decyzja = (pvalue <= alfa)
   
   # CR (opisowy)
   if (decyzja) {
@@ -61,7 +61,7 @@ Zadanie7 <- function(markets, N = 10000, alfa, rodzaj = "c") {
   # wykres
   par(mfrow=c(1,1))
   hist(W_perm,
-       breaks = 40,
+       breaks = "FD",
        main = "Test permutacyjny - rozkład statystyki",
        xlab = "Różnica średnich",
        ylab = "Częstość",

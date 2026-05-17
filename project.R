@@ -3,9 +3,6 @@ dane <- read.csv2("dane.csv")
 market1 <- na.omit(dane$Market1)
 market2 <- na.omit(dane$Market2)
 
-globalmin = min(c(market1,market2))
-globalmax = max(c(market1,market2))
-
 # Polecenie 1.
 # Zaprezentować dane wykorzystując wykresy pudełkowe. medianę i kwartale
 source("1.R")
@@ -46,5 +43,5 @@ Zadanie6(list(market1, market2), 0.05, 'c')
 
 #7. Opracować test permutacyjny do sprawdzenia polecenia opisanego w punkcie 6. 
 source("7.R")
-Zadanie7(list(market1, market2),10000, 0.05,'c') 
+Zadanie7(list(market1, market2), 0.05,10000,'c') 
 
